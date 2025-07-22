@@ -2,7 +2,6 @@
   "name": "tailwind-plus-template",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://prady0t.github.io/rockfield-tennis-club-website/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
