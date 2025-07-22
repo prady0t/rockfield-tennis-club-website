@@ -10,10 +10,11 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // IMPORTANT: Set basePath to your repository name for GitHub Pages
-  basePath: '/rockfield-tennis-club-website',
-  // IMPORTANT: Set assetPrefix to the same value as basePath for static assets
-  assetPrefix: '/rockfield-tennis-club-website/',
+  // IMPORTANT: Set basePath to your repository name for GitHub Pages (production only)
+  ...(process.env.NODE_ENV === 'production' && {
+    basePath: '/rockfield-tennis-club-website',
+    assetPrefix: '/rockfield-tennis-club-website/',
+  }),
 }
 
 const withMDX = nextMDX({
