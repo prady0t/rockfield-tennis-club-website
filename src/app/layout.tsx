@@ -7,17 +7,12 @@ import '@/styles/tailwind.css'
 
 export const metadata: Metadata = {
   title: {
-    template: '%s - Spencer Sharp',
+    template: '%s - Rockfield Tennis Club',
     default:
-      'Spencer Sharp - Software designer, founder, and amateur astronaut',
+      'Rockfield Tennis Club - Premier Tennis Club in Ireland',
   },
   description:
-    'I’m Spencer, a software designer and entrepreneur based in New York City. I’m the founder and CEO of Planetaria, where we develop technologies that empower regular people to explore space on their own terms.',
-  alternates: {
-    types: {
-      'application/rss+xml': `${process.env.NEXT_PUBLIC_SITE_URL}/feed.xml`,
-    },
-  },
+    'Rockfield Tennis Club was established in 1983 and we are a local community club that prides ourselves on our open and friendly atmosphere. We are a multi-surface facility offering artificial clay courts, astro and hard courts.',
 }
 
 export default function RootLayout({
