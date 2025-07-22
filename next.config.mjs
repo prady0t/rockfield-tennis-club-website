@@ -7,11 +7,7 @@ const nextConfig = {
   output: 'export',
   trailingSlash: true,
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
-  experimental: {
-    outputFileTracingIncludes: {
-      '/articles/*': ['./src/app/articles/**/*.mdx'],
-    },
-  },
+
 }
 
 const withMDX = nextMDX({
