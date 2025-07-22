@@ -59,7 +59,7 @@ export default function Home() {
         <div className="max-w-2xl mx-auto text-center">
           <div className="flex justify-center mb-8">
             <Image
-              src="/RockfieldLogo.webp"
+              src="RockfieldLogo.webp"
               alt="Rockfield Tennis Club Logo"
               width={300}
               height={300}
