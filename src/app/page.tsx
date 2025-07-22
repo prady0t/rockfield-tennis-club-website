@@ -155,8 +155,8 @@ export default function Home() {
               Pay & Play
               <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
             </Button>
-            <Button href="/speaking" variant="secondary" className="group">
-              Coaching
+            <Button href="/uses" variant="secondary" className="group">
+              Contact
               <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
             </Button>
           </div>
