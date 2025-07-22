@@ -2,7 +2,7 @@ import { type Config } from 'tailwindcss'
 
 export default {
   theme: {
-    typography: ({ theme }) => ({
+    typography: ({ theme }: { theme: any }) => ({
       invert: {
         css: {
           '--tw-prose-body': 'var(--tw-prose-invert-body)',
