@@ -10,6 +10,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/rockfield-tennis-club-website/' : '',
+  basePath: process.env.NODE_ENV === 'production' ? '/rockfield-tennis-club-website' : '',
 }
 
 const withMDX = nextMDX({
