@@ -72,7 +72,7 @@ export default function Policies() {
             <Card>
               <div className="flex flex-col items-center text-center">
                 <img 
-                  src="/dlp_officer.jpeg" 
+                  src={process.env.NODE_ENV === 'production' ? '/rockfield-tennis-club-website/dlp_officer.jpeg' : '/dlp_officer.jpeg'}
                   alt="Alannah Grace - Designated Liaison Person" 
                   className="w-40 h-40 rounded-full object-cover mb-4 shadow-lg"
                 />
@@ -88,7 +88,7 @@ export default function Policies() {
             <Card>
               <div className="flex flex-col items-center text-center">
                 <img 
-                  src="/ShaneDalton.jpg" 
+                  src={process.env.NODE_ENV === 'production' ? '/rockfield-tennis-club-website/ShaneDalton.jpg' : '/ShaneDalton.jpg'}
                   alt="Shane Dalton - Child Protection Officer" 
                   className="w-40 h-40 rounded-full object-cover mb-4 shadow-lg"
                 />
@@ -104,7 +104,7 @@ export default function Policies() {
             <Card>
               <div className="flex flex-col items-center text-center">
                 <img 
-                  src="/jean_ryan-scaled.jpg" 
+                  src={process.env.NODE_ENV === 'production' ? '/rockfield-tennis-club-website/jean_ryan-scaled.jpg' : '/jean_ryan-scaled.jpg'}
                   alt="Jean Ryan - Child Protection Officer" 
                   className="w-40 h-40 rounded-full object-cover mb-4 shadow-lg"
                 />

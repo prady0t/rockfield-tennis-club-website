@@ -63,7 +63,7 @@ export default function PublicPlay() {
         <div className="mb-16">
           <div className="relative w-full h-64 md:h-80 lg:h-96 rounded-2xl overflow-hidden shadow-2xl mb-8">
             <Image
-              src="/Pay-and-play.jpg"
+              src={process.env.NODE_ENV === 'production' ? '/rockfield-tennis-club-website/Pay-and-play.jpg' : '/Pay-and-play.jpg'}
               alt="Rockfield Tennis Club Pay and Play"
               fill
               className="object-cover"

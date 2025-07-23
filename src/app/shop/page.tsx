@@ -108,7 +108,7 @@ export default function Shop() {
                 className="block relative w-80 h-80 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-200 cursor-pointer"
               >
                 <Image
-                  src="/keep-calm-play-tennis.jpg"
+                  src={process.env.NODE_ENV === 'production' ? '/rockfield-tennis-club-website/keep-calm-play-tennis.jpg' : '/keep-calm-play-tennis.jpg'}
                   alt="Rockfield Tennis Club Shop - Click to visit online store"
                   fill
                   className="object-cover object-left"

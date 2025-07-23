@@ -66,7 +66,7 @@ export default function Home() {
         <div className="max-w-2xl mx-auto text-center">
           <div className="flex justify-center mb-8">
             <Image
-              src="/RockfieldLogo.webp"
+              src={process.env.NODE_ENV === 'production' ? '/rockfield-tennis-club-website/RockfieldLogo.webp' : '/RockfieldLogo.webp'}
               alt="Rockfield Tennis Club Logo"
               width={400}
               height={400}

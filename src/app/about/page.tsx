@@ -10,7 +10,7 @@ export default function About() {
         <div className="mb-16">
           <div className="relative w-full h-64 md:h-80 lg:h-96 rounded-2xl overflow-hidden shadow-2xl">
             <Image
-              src="/keepcalm-7-scaled.jpg"
+              src={process.env.NODE_ENV === 'production' ? '/rockfield-tennis-club-website/keepcalm-7-scaled.jpg' : '/keepcalm-7-scaled.jpg'}
               alt="Rockfield Tennis Club"
               fill
               className="object-contain bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/20 dark:to-teal-800/20"
