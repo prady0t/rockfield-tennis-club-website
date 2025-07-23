@@ -28,10 +28,13 @@ export function Footer() {
             <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
               <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm font-medium text-zinc-800 dark:text-zinc-200">
                 <NavLink href="/">Home</NavLink>
-                <NavLink href="/about">Membership</NavLink>
-                <NavLink href="/projects">Projects</NavLink>
-                <NavLink href="/speaking">Coaching</NavLink>
-                <NavLink href="/uses">Contact</NavLink>
+                <NavLink href="/public-play">Public Play</NavLink>
+                <NavLink href="/coaching">Coaching</NavLink>
+                <NavLink href="/members">Members</NavLink>
+                <NavLink href="/join">Join</NavLink>
+                <NavLink href="/policies">Policies</NavLink>
+                <NavLink href="/shop">Shop</NavLink>
+                <NavLink href="/about">About</NavLink>
               </div>
               <p className="text-sm text-zinc-400 dark:text-zinc-500">
                 &copy; {new Date().getFullYear()} Rockfield Tennis Club. All rights

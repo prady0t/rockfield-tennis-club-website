@@ -15,6 +15,10 @@ const nextConfig = {
     basePath: '/rockfield-tennis-club-website',
     assetPrefix: '/rockfield-tennis-club-website/',
   }),
+  // Ensure public assets are accessible in development
+  experimental: {
+    appDir: true,
+  },
 }
 
 const withMDX = nextMDX({

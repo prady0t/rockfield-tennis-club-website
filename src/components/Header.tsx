@@ -83,9 +83,21 @@ function MobileNavItem({
   href: string
   children: React.ReactNode
 }) {
+  let pathname = usePathname()
+  let isActive = pathname === href || (href !== '/' && pathname.startsWith(href))
+
   return (
     <li>
-      <PopoverButton as={Link} href={href} className="block py-2">
+      <PopoverButton 
+        as={Link} 
+        href={href} 
+        className={clsx(
+          'block py-2 transition',
+          isActive
+            ? 'text-teal-500 dark:text-teal-400 font-semibold'
+            : 'text-zinc-800 dark:text-zinc-300 hover:text-teal-500 dark:hover:text-teal-400'
+        )}
+      >
         {children}
       </PopoverButton>
     </li>
@@ -121,11 +133,13 @@ function MobileNavigation(
         <nav className="mt-6">
           <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
             <MobileNavItem href="/">Home</MobileNavItem>
-            <MobileNavItem href="/about">Membership</MobileNavItem>
-            <MobileNavItem href="/articles">Public&nbsp;Play</MobileNavItem>
-            <MobileNavItem href="/projects">Projects</MobileNavItem>
-            <MobileNavItem href="/speaking">Coaching</MobileNavItem>
-            <MobileNavItem href="/uses">Contact</MobileNavItem>
+            <MobileNavItem href="/public-play">Public&nbsp;Play</MobileNavItem>
+            <MobileNavItem href="/coaching">Coaching</MobileNavItem>
+            <MobileNavItem href="/members">Members</MobileNavItem>
+            <MobileNavItem href="/join">Join</MobileNavItem>
+            <MobileNavItem href="/policies">Policies</MobileNavItem>
+            <MobileNavItem href="/shop">Shop</MobileNavItem>
+            <MobileNavItem href="/about">About</MobileNavItem>
           </ul>
         </nav>
       </PopoverPanel>
@@ -140,7 +154,8 @@ function NavItem({
   href: string
   children: React.ReactNode
 }) {
-  let isActive = usePathname() === href
+  let pathname = usePathname()
+  let isActive = pathname === href || (href !== '/' && pathname.startsWith(href))
 
   return (
     <li>
@@ -167,11 +182,13 @@ function DesktopNavigation(props: React.ComponentPropsWithoutRef<'nav'>) {
     <nav {...props}>
       <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
         <NavItem href="/">Home</NavItem>
-        <NavItem href="/about">Membership</NavItem>
-        <NavItem href="/articles">Public&nbsp;Play</NavItem>
-        <NavItem href="/projects">Projects</NavItem>
-        <NavItem href="/speaking">Coaching</NavItem>
-        <NavItem href="/uses">Contact</NavItem>
+        <NavItem href="/public-play">Public&nbsp;Play</NavItem>
+        <NavItem href="/coaching">Coaching</NavItem>
+        <NavItem href="/members">Members</NavItem>
+        <NavItem href="/join">Join</NavItem>
+        <NavItem href="/policies">Policies</NavItem>
+        <NavItem href="/shop">Shop</NavItem>
+        <NavItem href="/about">About</NavItem>
       </ul>
     </nav>
   )
@@ -214,108 +231,72 @@ export function Header() {
   let isInitial = useRef(true)
 
   useEffect(() => {
-    let upDelay = 64
-
-    function setProperty(property: string, value: string) {
-      document.documentElement.style.setProperty(property, value)
-    }
-
-    function removeProperty(property: string) {
-      document.documentElement.style.removeProperty(property)
-    }
-
-    function updateHeaderStyles() {
-      if (!headerRef.current) {
-        return
+    // Simple sticky header - always stays at top
+    if (headerRef.current) {
+      const header = headerRef.current
+      const updateHeader = () => {
+        const scrollY = window.scrollY
+        const isDark = document.documentElement.classList.contains('dark')
+        
+        if (scrollY > 0) {
+          header.style.position = 'fixed'
+          header.style.top = '0'
+          header.style.left = '0'
+          header.style.right = '0'
+          header.style.zIndex = '50'
+          header.style.backgroundColor = isDark 
+            ? 'rgba(24, 24, 27, 0.9)' // dark zinc-900
+            : 'rgba(255, 255, 255, 0.9)'
+          header.style.backdropFilter = 'blur(8px)'
+          header.style.borderBottom = isDark
+            ? '1px solid rgba(63, 63, 70, 0.5)' // dark zinc-700
+            : '1px solid rgba(0, 0, 0, 0.1)'
+        } else {
+          header.style.position = 'relative'
+          header.style.backgroundColor = 'transparent'
+          header.style.borderBottom = 'none'
+        }
       }
 
-      let { top, height } = headerRef.current.getBoundingClientRect()
-      let scrollY = clamp(
-        window.scrollY,
-        0,
-        document.body.scrollHeight - window.innerHeight,
-      )
+      updateHeader()
+      window.addEventListener('scroll', updateHeader, { passive: true })
+      window.addEventListener('resize', updateHeader)
 
-      if (isInitial.current) {
-        setProperty('--header-position', 'sticky')
-      }
+      // Listen for theme changes
+      const observer = new MutationObserver(updateHeader)
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class']
+      })
 
-      if (isInitial.current || scrollY < 0) {
-        setProperty('--header-height', `${height}px`)
-        setProperty('--header-mb', `0px`)
-      } else if (top + height < -upDelay) {
-        let offset = Math.max(height, scrollY - upDelay)
-        setProperty('--header-height', `${offset}px`)
-        setProperty('--header-mb', `${height - offset}px`)
-      } else if (top === 0) {
-        setProperty('--header-height', `${scrollY + height}px`)
-        setProperty('--header-mb', `${-scrollY}px`)
-      }
-
-      if (top === 0 && scrollY > 0) {
-        setProperty('--header-inner-position', 'fixed')
-        removeProperty('--header-top')
-      } else {
-        removeProperty('--header-inner-position')
-        setProperty('--header-top', '0px')
+      return () => {
+        window.removeEventListener('scroll', updateHeader)
+        window.removeEventListener('resize', updateHeader)
+        observer.disconnect()
       }
     }
-
-    function updateStyles() {
-      updateHeaderStyles()
-      isInitial.current = false
-    }
-
-    updateStyles()
-    window.addEventListener('scroll', updateStyles, { passive: true })
-    window.addEventListener('resize', updateStyles)
-
-    return () => {
-      window.removeEventListener('scroll', updateStyles)
-      window.removeEventListener('resize', updateStyles)
-    }
-  }, [isHomePage])
+  }, [])
 
   return (
-    <>
-      <header
-        className="pointer-events-none relative z-50 flex flex-none flex-col"
-        style={{
-          height: 'var(--header-height)',
-          marginBottom: 'var(--header-mb)',
-        }}
-      >
-        <div
-          ref={headerRef}
-          className="top-0 z-10 h-16 pt-6"
-          style={{
-            position:
-              'var(--header-position)' as React.CSSProperties['position'],
-          }}
-        >
-          <Container
-            className="top-(--header-top,--spacing(6)) w-full"
-            style={{
-              position:
-                'var(--header-inner-position)' as React.CSSProperties['position'],
-            }}
-          >
-            <div className="relative flex gap-4">
-              <div className="flex flex-1">
-              </div>
-              <div className="flex flex-1 justify-end md:justify-center">
-                <MobileNavigation className="pointer-events-auto md:hidden" />
-                <DesktopNavigation className="pointer-events-auto hidden md:block" />
-              </div>
-              <div className="flex justify-end md:flex-1">
-                <div className="pointer-events-auto">
-                  <ThemeToggle />
-                </div>
-              </div>
+    <header
+      ref={headerRef}
+      className="sticky top-0 z-50 h-16 pt-6 bg-white/90 backdrop-blur-sm border-b border-zinc-200/50 dark:bg-zinc-900/90 dark:border-zinc-700/50"
+    >
+      <Container className="w-full">
+        <div className="relative flex gap-4">
+          <div className="flex flex-1">
+          </div>
+          <div className="flex flex-1 justify-end md:justify-center">
+            <MobileNavigation className="pointer-events-auto md:hidden" />
+            <DesktopNavigation className="pointer-events-auto hidden md:block" />
+          </div>
+          <div className="flex justify-end md:flex-1">
+            <div className="pointer-events-auto">
+              <ThemeToggle />
             </div>
-          </Container>
+          </div>
         </div>
-      </header>
-    </>
+      </Container>
+    </header>
   )
 }
