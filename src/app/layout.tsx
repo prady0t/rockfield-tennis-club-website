@@ -13,6 +13,30 @@ export const metadata: Metadata = {
   },
   description:
     'Rockfield Tennis Club was established in 1983 and we are a local community club that prides ourselves on our open and friendly atmosphere. We are a multi-surface facility offering artificial clay courts, astro and hard courts.',
+  icons: {
+    icon: [
+      {
+        url: process.env.NODE_ENV === 'production' ? '/rockfield-tennis-club-website/favicon.ico' : '/favicon.ico',
+        type: 'image/x-icon',
+      },
+      {
+        url: process.env.NODE_ENV === 'production' ? '/rockfield-tennis-club-website/RockfieldLogo.webp' : '/RockfieldLogo.webp',
+        type: 'image/webp',
+      },
+    ],
+    shortcut: [
+      {
+        url: process.env.NODE_ENV === 'production' ? '/rockfield-tennis-club-website/favicon.ico' : '/favicon.ico',
+        type: 'image/x-icon',
+      },
+    ],
+    apple: [
+      {
+        url: process.env.NODE_ENV === 'production' ? '/rockfield-tennis-club-website/RockfieldLogo.webp' : '/RockfieldLogo.webp',
+        type: 'image/webp',
+      },
+    ],
+  },
 }
 
 export default function RootLayout({
