@@ -17,14 +17,20 @@ export function NewsletterContent({ filename }: NewsletterContentProps) {
     const basePath = process.env.NODE_ENV === 'production' ? '/rockfield-tennis-club-website' : ''
     const newsletterPath = `${basePath}/newsletter/${encodeURIComponent(filename)}`
     
+    console.log('NewsletterContent: Fetching from:', newsletterPath)
+    console.log('NewsletterContent: Filename:', filename)
+    console.log('NewsletterContent: Base path:', basePath)
+    
     fetch(newsletterPath)
       .then(response => {
+        console.log('NewsletterContent: Response status:', response.status)
         if (!response.ok) {
           throw new Error(`Newsletter not found: ${response.status} ${response.statusText}`)
         }
         return response.text()
       })
       .then(htmlContent => {
+        console.log('NewsletterContent: Content length:', htmlContent.length)
         setContent(htmlContent)
         setLoading(false)
       })
@@ -48,7 +54,7 @@ export function NewsletterContent({ filename }: NewsletterContentProps) {
       <div className="text-center py-12">
         <p className="text-red-600 dark:text-red-400 mb-4">{error}</p>
         <Link 
-          href="/newsletter"
+          href={`${process.env.NODE_ENV === 'production' ? '/rockfield-tennis-club-website' : ''}/newsletter`}
           className="text-teal-500 dark:text-teal-400 hover:underline"
         >
           ← Back to Newsletters
@@ -61,7 +67,7 @@ export function NewsletterContent({ filename }: NewsletterContentProps) {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <Link 
-          href="/newsletter"
+          href={`${process.env.NODE_ENV === 'production' ? '/rockfield-tennis-club-website' : ''}/newsletter`}
           className="text-teal-500 dark:text-teal-400 hover:underline flex items-center gap-2"
         >
           ← Back to Newsletters

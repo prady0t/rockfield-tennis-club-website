@@ -62,8 +62,12 @@ export function NewsletterClient({ initialNewsletters }: NewsletterClientProps) 
         <Card key={index} className="flex flex-col">
           <Card.Title>
             <a 
-              href={`/newsletter?file=${encodeURIComponent(newsletter.filename)}`}
+              href={`${process.env.NODE_ENV === 'production' ? '/rockfield-tennis-club-website' : ''}/newsletter?file=${encodeURIComponent(newsletter.filename)}`}
               className="text-teal-500 dark:text-teal-400 hover:underline"
+              onClick={(e) => {
+                console.log('Clicking newsletter:', newsletter.filename)
+                console.log('Target URL:', e.currentTarget.href)
+              }}
             >
               {newsletter.displayName}
             </a>
