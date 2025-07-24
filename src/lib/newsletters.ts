@@ -1,14 +1,19 @@
-import { NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
 
-export async function GET() {
+export interface Newsletter {
+  name: string
+  filename: string
+  displayName: string
+}
+
+export function getNewsletters(): Newsletter[] {
   try {
     const newsletterDir = path.join(process.cwd(), 'public/newsletter')
     
     // Check if directory exists
     if (!fs.existsSync(newsletterDir)) {
-      return NextResponse.json({ newsletters: [] })
+      return []
     }
 
     // Read all files in the newsletter directory
@@ -39,9 +44,9 @@ export async function GET() {
         return b.displayName.localeCompare(a.displayName) // Reverse alphabetical
       })
 
-    return NextResponse.json({ newsletters })
+    return newsletters
   } catch (error) {
     console.error('Error reading newsletter directory:', error)
-    return NextResponse.json({ newsletters: [] })
+    return []
   }
 } 

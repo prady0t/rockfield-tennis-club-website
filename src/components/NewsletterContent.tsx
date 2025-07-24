@@ -15,10 +15,12 @@ export function NewsletterContent({ filename }: NewsletterContentProps) {
   useEffect(() => {
     // Fetch the newsletter content
     const basePath = process.env.NODE_ENV === 'production' ? '/rockfield-tennis-club-website' : ''
-    fetch(`${basePath}/newsletter/${encodeURIComponent(filename)}`)
+    const newsletterPath = `${basePath}/newsletter/${encodeURIComponent(filename)}`
+    
+    fetch(newsletterPath)
       .then(response => {
         if (!response.ok) {
-          throw new Error('Newsletter not found')
+          throw new Error(`Newsletter not found: ${response.status} ${response.statusText}`)
         }
         return response.text()
       })
@@ -28,7 +30,7 @@ export function NewsletterContent({ filename }: NewsletterContentProps) {
       })
       .catch(error => {
         console.error('Error fetching newsletter content:', error)
-        setError('Failed to load newsletter content')
+        setError(`Failed to load newsletter content: ${error.message}`)
         setLoading(false)
       })
   }, [filename])

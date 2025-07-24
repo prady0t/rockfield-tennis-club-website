@@ -4,39 +4,18 @@ import { useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Card } from '@/components/Card'
 import { NewsletterContent } from '@/components/NewsletterContent'
+import type { Newsletter } from '@/lib/newsletters'
 
-interface Newsletter {
-  name: string
-  filename: string
-  displayName: string
+interface NewsletterClientProps {
+  initialNewsletters: Newsletter[]
 }
 
-export function NewsletterClient() {
-  const [newsletters, setNewsletters] = useState<Newsletter[]>([])
-  const [loading, setLoading] = useState(true)
+export function NewsletterClient({ initialNewsletters }: NewsletterClientProps) {
+  const [newsletters] = useState<Newsletter[]>(initialNewsletters)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const searchParams = useSearchParams()
   const selectedNewsletter = searchParams.get('file')
-
-  useEffect(() => {
-    const basePath = process.env.NODE_ENV === 'production' ? '/rockfield-tennis-club-website' : ''
-    fetch(`${basePath}/api/newsletters`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to fetch newsletters')
-        }
-        return response.json()
-      })
-      .then(data => {
-        setNewsletters(data.newsletters || [])
-        setLoading(false)
-      })
-      .catch(error => {
-        console.error('Error fetching newsletters:', error)
-        setError('Failed to load newsletters')
-        setLoading(false)
-      })
-  }, [])
 
   // If a specific newsletter is selected, show it
   if (selectedNewsletter) {

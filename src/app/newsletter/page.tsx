@@ -1,8 +1,12 @@
 import { Suspense } from 'react'
 import { Container } from '@/components/Container'
 import { NewsletterClient } from '@/components/NewsletterClient'
+import { getNewsletters } from '@/lib/newsletters'
 
 export default function NewsletterPage() {
+  // Get newsletters at build time
+  const newsletters = getNewsletters()
+  
   return (
     <Container className="mt-16 sm:mt-32">
       <div className="mx-auto max-w-2xl lg:max-w-none">
@@ -22,7 +26,7 @@ export default function NewsletterPage() {
             </p>
           </div>
         }>
-          <NewsletterClient />
+          <NewsletterClient initialNewsletters={newsletters} />
         </Suspense>
       </div>
     </Container>
