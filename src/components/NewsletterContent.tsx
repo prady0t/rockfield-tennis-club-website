@@ -14,7 +14,8 @@ export function NewsletterContent({ filename }: NewsletterContentProps) {
 
   useEffect(() => {
     // Fetch the newsletter content
-    fetch(`/newsletter/${encodeURIComponent(filename)}`)
+    const basePath = process.env.NODE_ENV === 'production' ? '/rockfield-tennis-club-website' : ''
+    fetch(`${basePath}/newsletter/${encodeURIComponent(filename)}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Newsletter not found')

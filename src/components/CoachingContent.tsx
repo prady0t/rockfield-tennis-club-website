@@ -10,7 +10,8 @@ export function CoachingContent() {
 
   useEffect(() => {
     // Try to fetch the markdown file
-    fetch('/coaching/Coaching.md')
+    const basePath = process.env.NODE_ENV === 'production' ? '/rockfield-tennis-club-website' : ''
+    fetch(`${basePath}/coaching/Coaching.md`)
       .then(response => response.text())
       .then(content => {
         setMarkdownContent(content)
@@ -37,6 +38,10 @@ export function CoachingContent() {
               } else if (src.startsWith('./')) {
                 imageSrc = src.replace('./', '/')
               }
+              
+              // Add base path for production
+              const basePath = process.env.NODE_ENV === 'production' ? '/rockfield-tennis-club-website' : ''
+              imageSrc = `${basePath}${imageSrc}`
               
               return (
                 <div className="my-8 flex justify-center">
