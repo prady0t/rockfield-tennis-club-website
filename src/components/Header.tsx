@@ -14,6 +14,7 @@ import {
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
+import { BookCourtButton } from '@/components/BookCourtButton'
 
 function CloseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -141,6 +142,9 @@ function MobileNavigation(
             <MobileNavItem href="/shop">Shop</MobileNavItem>
             <MobileNavItem href="/about">About</MobileNavItem>
           </ul>
+          <div className="mt-4 pt-4 border-t border-zinc-100 dark:border-zinc-100/5">
+            <BookCourtButton className="w-full justify-center text-sm py-2" />
+          </div>
         </nav>
       </PopoverPanel>
     </Popover>
@@ -291,7 +295,8 @@ export function Header() {
             <DesktopNavigation className="pointer-events-auto hidden md:block" />
           </div>
           <div className="flex justify-end md:flex-1">
-            <div className="pointer-events-auto">
+            <div className="pointer-events-auto flex items-center gap-3">
+              <BookCourtButton className="hidden md:inline-flex" />
               <ThemeToggle />
             </div>
           </div>

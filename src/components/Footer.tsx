@@ -35,6 +35,7 @@ export function Footer() {
                 <NavLink href="/policies">Policies</NavLink>
                 <NavLink href="/shop">Shop</NavLink>
                 <NavLink href="/about">About</NavLink>
+                <NavLink href="/newsletter">Newsletters</NavLink>
               </div>
               <p className="text-sm text-zinc-400 dark:text-zinc-500">
                 &copy; {new Date().getFullYear()} Rockfield Tennis Club. All rights

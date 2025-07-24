@@ -194,8 +194,16 @@ export default function Home() {
             </Button>
           </div>
 
-          {/* Social Links Section */}
+          {/* Safeguarding Children Button */}
           <div className="mt-16 flex flex-col items-center">
+            <Button href="/policies" variant="secondary" className="group mb-8">
+              Safeguarding Children
+              <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
+            </Button>
+          </div>
+
+          {/* Social Links Section */}
+          <div className="mt-8 flex flex-col items-center">
             <h3 className="text-lg font-semibold text-zinc-800 dark:text-zinc-100 mb-4">
               Follow Us
             </h3>

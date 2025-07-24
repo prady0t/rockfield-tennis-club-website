@@ -127,6 +127,27 @@ export default function About() {
           </div>
         </div>
 
+        {/* Student Membership Clarification */}
+        <div className="mt-16 rounded-2xl border border-amber-200 bg-amber-50 p-8 dark:border-amber-700/40 dark:bg-amber-900/20">
+          <div className="flex items-start space-x-4">
+            <div className="flex-shrink-0">
+              <svg className="h-6 w-6 text-amber-600 dark:text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-amber-800 dark:text-amber-200 mb-2">
+                Important Note: Student Membership
+              </h3>
+              <p className="text-amber-700 dark:text-amber-300">
+                Student Membership is not a separate membership option. Students over 18 who are in third-level education 
+                are eligible to join under a <strong>Family Membership</strong> at the reduced student rate. 
+                This applies to students living at home while pursuing third-level education.
+              </p>
+            </div>
+          </div>
+        </div>
+
         <div className="mt-24 rounded-2xl border border-zinc-200 p-8 dark:border-zinc-700">
           <div className="text-center">
             <h2 className="text-2xl font-bold text-zinc-800 dark:text-zinc-100">
